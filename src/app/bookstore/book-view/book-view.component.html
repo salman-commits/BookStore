@@ -1,0 +1,76 @@
+<div class="container">
+  <form class="form-horizontal" [formGroup]="bookFormGroup">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">{{panelTitle}}</h3>
+      </div>
+      <div class="panel-body">
+        <div class="form-group">
+          <label class="col-sm-2 control-label form-labels" for="iSBN">ISBN</label>
+          <div class="col-sm-10">
+            <input id="ISBN" type="text" class="form-control" formControlName="iSBN" readonly>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label form-labels" for="title">Title</label>
+          <div class="col-sm-8">
+            <input id="title" type="text" class="form-control" formControlName="title" readonly>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label form-labels" for="description">Description</label>
+          <div class="col-sm-10">
+            <textarea class="form-control" id="description" rows="3" formControlName="description" readonly></textarea>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label form-labels" for="authorName">Author Name</label>
+          <div class="col-sm-10">
+            <input id="authorName" type="text" class="form-control" formControlName="authorName" readonly>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label form-labels" for="quantity">Quantity</label>
+          <div class="col-sm-10">
+            <input id="quantity" type="text" class="form-control" formControlName="quantity" readonly>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label form-labels" for="price">Price ($)</label>
+          <div class="col-sm-10">
+            <input id="price" type="text" class="form-control" formControlName="price" readonly>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label form-labels" for="publishedDate">Published Date</label>
+          <div class="col-sm-10">
+            <input id="publishedDate" type="date" class="form-control" formControlName="publishedDate" readonly>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label form-labels" for="rating">Rating</label>
+          <div class="col-sm-10">
+            <input id="rating" type="text" class="form-control" formControlName="rating" readonly>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-2 control-label form-labels" for="image">Image</label>
+          <div class="col-sm-10">
+            <img src={{bookImageURL}} [alt]="bookFormGroup.get('title')?.value" style="display: block" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label form-labels" for="image">Image</label>
+          <div class="col-sm-10">
+            <button (click)="getBookImage(bookFormGroup.get('id')?.value)">See Book Image</button>
+            <img src={{imageBlob}} *ngIf="imageBlob" [alt]="bookFormGroup.get('title')?.value" style="display: block" />
+          </div>
+        </div>
+      </div>
+      <div class="panel-footer">
+        <button class="btn btn-primary" type="submit" (click)="Cancel()">Cancel</button>
+      </div>
+    </div>
+  </form>
+</div>

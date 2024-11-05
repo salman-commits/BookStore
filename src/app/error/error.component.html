@@ -1,0 +1,23 @@
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="error-template">
+                <h1>
+                    Oops!</h1>
+                <h2 *ngIf="serverError">Error occured!</h2>
+                <div class="error-details">
+                    Error Message:<strong> {{errorMessage}} </strong><br /><br />
+                    Sorry, an error has occured, if you are logged in, try signing again or else please contact administrator at
+                    <a class="btn btn-primary btn-md" href="mailto:someone@example.com">
+                        <i class="bi bi-envelope-at"></i> Send Email</a>                    
+                </div>
+                <div class="error-actions">
+                    <a routerLinkActive="active" routerLink="/home" class="btn btn-primary btn-lg">
+                        <i class="bi bi-house"></i>
+                        Take Me Home </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

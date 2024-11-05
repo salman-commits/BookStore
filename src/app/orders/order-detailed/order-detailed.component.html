@@ -1,0 +1,81 @@
+<div class="container mt-5">
+    <div class="row" *ngIf="order">
+        <div class="col-8">
+            <div>
+                <div class="table-responsive">
+                    <table class="table table-hover caption-top">
+                        <caption><i>List of books in your order no #{{order.OrderId}}</i>
+                            <button class="btn btn-outline-primary mx-3" routerLink="/orders">
+                                <i class="fa fa-angle-left"></i> Back to orders
+                            </button>
+                        </caption>
+                        <thead class="table-light">
+                            <tr>
+                                <th>
+                                    <div class="py-2">Product</div>
+                                </th>
+                                <th>
+                                    <div class="py-2">Price</div>
+                                </th>
+                                <th [class.text-center]="true">
+                                    <div class="py-2">Quantity</div>
+                                </th>
+                                <th>
+                                    <div class="py-2">Total</div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-group-divider">
+                            <tr *ngFor="let item of order?.OrderItems">
+                                <th>
+                                    <div class="p-2 d-inline-block">
+                                        <img src="{{item.Book?.ImageThumbnailURL}}" alt="{{item.Book?.Title}}"
+                                            class="img-fluid">
+                                        <div class="ms-3 d-inline-block align-middle">
+                                            <h5 class="mb-0">
+                                                <a [routerLink]="['/shop/view', item.Book?.Id]"
+                                                    class="text-dark text-decoration-none">
+                                                    {{item.Book?.Title}}
+                                                </a>
+                                            </h5>
+                                            <span class="text-muted fst-italic">
+                                                Category: {{item.Book?.BookCategory?.BookCategoryName}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </th>
+                                <td class="align-middle"><strong>{{item.Price| currency}}</strong></td>
+                                <td class="align-middle">
+                                    <div class="d-flex align-items-center" [class.justify-content-center]="true">
+                                        <strong style="font-size: 1.2em;">{{item.Quantity}}</strong>
+                                    </div>
+                                </td>
+                                <td class="align-middle"><strong>{{item.Price! * item.Quantity! | currency}}</strong>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-4" style="margin-top: 55px;">
+            <div class="bg-light px-4 py-3 text-uppercase font-weight-bold">Order summary</div>
+            <div class="p-4">
+                <ul class="list-unstyled mb-1">
+                    <li class="d-flex justify-content-between py-3 border-bottom">
+                        <strong class="text-muted">Order subtotal</strong>
+                        <strong>{{order.Subtotal| currency}}</strong>
+                    </li>
+                    <li class="d-flex justify-content-between py-3 border-bottom">
+                        <strong class="text-muted">Shipping & handling</strong>
+                        <strong>{{order.ShippingCharge | currency}}</strong>
+                    </li>
+                    <li class="d-flex justify-content-between py-3 border-bottom">
+                        <strong class="text-muted">Total</strong>
+                        <strong>{{order.GrandTotal| currency}}</strong>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

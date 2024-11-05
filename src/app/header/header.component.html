@@ -1,0 +1,64 @@
+<div class="container">
+    <header
+        class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between mb-1 border-bottom">
+        <div class="col-md-3 mb-2 mb-md-0">
+            <a routerLinkActive="active" routerLink="home"
+                class="d-inline-flex link-body-emphasis text-decoration-none">
+                <img src="/assets/images/brandlogo.png" alt="Book Store Inc." class="" style="max-height: 90px;">
+            </a>
+        </div>
+        <div class="col-md-3 d-flex justify-content-center">
+            <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+                <li>
+                    <a class="nav-link px-2 link-primary" routerLinkActive="active" routerLink="home"
+                        ariaCurrentWhenActive="page">Home</a>
+                </li>
+                <li> <a class="nav-link px-2" routerLinkActive="active" routerLink="shop">Shop</a></li>
+                <li> <a class="nav-link px-2" routerLinkActive="active" routerLink="booklist">Book Store</a> </li>
+                <li><a href="#" class="nav-link px-2" routerLinkActive="active" routerLink="about">About</a></li>
+            </ul>
+
+        </div>
+        <div class="col-md-3 d-flex justify-content-end">
+            <a class="btn btn-primary" style="cursor: pointer;" *ngIf="!currentUser?.Email" routerLinkActive="active"
+                routerLink="login">Login</a>
+            <div *ngIf="currentUser?.Email">
+                <a routerLink="basket" class="position-relative">
+                    <i class="bi bi-cart3 text-dark" style="font-size: 20px; margin-right: 15px;"></i>
+                    <span *ngIf="basketCount! > 0"
+                        class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        {{basketCount}}
+                    </span>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-3 d-flex justify-content-center">
+            <ng-container *ngIf="currentUser?.Email">
+                <div class="dropdown" style="cursor: pointer;" dropdown>
+                    <a dropdownToggle class="dropdown-toggle" style="text-decoration:none;">
+                        <strong>Welcome! {{currentUser?.Email}}</strong>
+                    </a>
+                    <ul *dropdownMenu class="dropdown-menu dropdown-menu-right">
+                        <li class="py-1">
+                            <a routerLink="/basket" class="dropdown-item">
+                                <i class="fa fa-shopping-cart me-3"></i> View cart
+                            </a>
+                        </li>
+                        <li class="py-1">
+                            <a routerLink="/orders" class="dropdown-item">
+                                <i class="fa fa-history me-3"></i> View orders
+                            </a>
+                        </li>
+                        <div class="dropdown-divider"></div>
+                        <li class="py-1">
+                            <a (click)="LogOut()" class="dropdown-item">
+                                <i class="fa fa-sign-out me-3"></i> Logout
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </ng-container>
+        </div>
+
+    </header>
+</div>

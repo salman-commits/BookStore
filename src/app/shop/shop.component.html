@@ -1,0 +1,42 @@
+<div class="container">
+    <app-errorbadrequest [errorList]="errorBadRequestList"></app-errorbadrequest>
+    <div class="row align-items-center border-bottom">
+        <div class="col-lg-3 d-flex my-2">
+            <h5 class="text-warning ms-3">Categories</h5>
+        </div>
+        <div class="col-lg-3 d-flex justify-content-end my-2">
+            <app-pager-header [totalCount]="totalCount" [pageNumber]="bookParams.PageNumber"
+                [pageSize]="bookParams.PageSize"></app-pager-header>
+        </div>
+
+        <div class="col-lg-6 d-flex justify-content-end my-2">
+            <input (keyup.enter)="onSearch()" type="text" placeholder="Search by Title" class="form-control" #search />
+            <button (click)="onSearch()" class="btn btn-outline-primary mx-2">Search</button>
+            <button (click)="onReset()" class="btn btn-outline-success">Reset</button>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="categories.length > 0">
+        <section class="col-3">
+            <ul class="list-group my-3">
+                <li class="list-group-item" *ngFor="let cat of categories"
+                    [class.active]="cat.BookCategoryId === bookParams.BookCategoryId" [value]="cat.BookCategoryId"
+                    (click)="onCategoriesSelected(cat.BookCategoryId)">
+                    {{cat.BookCategoryName}}
+                </li>
+            </ul>
+        </section>
+        <section class="col-9">
+            <div class="row row-cols-3 g-3 my-0">
+                <div class="col" *ngFor="let book of books">
+                    <app-book-item [book]="book"></app-book-item>
+                </div>
+            </div>
+            <div class="row row-cols-3 justify-content-start g-3 mt-2">
+                <app-pager [totalCount]="totalCount" [pageSize]="bookParams.PageSize"
+                    [pageNumber]="bookParams.PageNumber" (pageChanged)="onPageChanged($event)">
+                </app-pager>
+            </div>
+        </section>
+    </div>
+</div>

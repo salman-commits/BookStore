@@ -1,0 +1,35 @@
+<div class="container mt-5">
+    <div *ngIf="orders.length === 0" class="row align-items-center">
+        <div class="col-lg-4 d-flex">
+            There are no orders for your account
+        </div>
+        <div class="col-lg-8 d-flex">
+            <a routerLink="/shop" class="btn btn-outline-primary mx-2">
+                <i class="bi bi-book me-2" style="font-size: 20px;"></i>
+                Add books to your shopping cart!
+            </a>
+        </div>
+    </div>
+    <div *ngIf="orders.length > 0" class="row align-items-center" class="row">
+        <div class="col-12">
+            <table class="table table-hover" style="cursor: pointer;">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Order No</th>
+                        <th>Date</th>
+                        <th>Total</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let order of orders" routerLink="/orders/{{order.OrderId}}">
+                        <th>#{{order.OrderId}} </th>
+                        <td>{{order.OrderDate | date: 'medium'}}</td>
+                        <td>{{order.OrderGrandTotal | currency}}</td>
+                        <td>{{order.OrderStatus}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

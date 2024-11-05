@@ -1,0 +1,22 @@
+.error-template {
+    padding: 40px 15px;
+    text-align: center;
+}
+
+.error-actions {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.error-actions .btn {
+    margin-right: 10px;
+}
+
+.text-danger.form-errors {
+    font-style: italic;
+}
+.control-label.form-labels {
+    font-weight: bold;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}

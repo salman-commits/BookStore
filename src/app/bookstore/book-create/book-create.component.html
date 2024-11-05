@@ -1,0 +1,120 @@
+<div class="container">
+  <form class="form-horizontal" [formGroup]="bookFormGroup">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">{{bookAction}} Book</h3>
+      </div>
+      <div class="panel-body">
+        <div class="form-group">
+          <label class="col-sm-2 control-label form-labels" for="isbn">ISBN</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" formControlName="isbn" readonly placeholder="Auto Generated Field">
+          </div>
+        </div>
+        <div class="form-group" [ngClass]="{'has-error': formErrors.title}">
+          <label class="col-sm-2 control-label form-labels" for="title">Title</label>
+          <div class="col-sm-10">
+            <input id="title" type="text" class="form-control" formControlName="title" placeholder="Enter Title.."
+              (blur)="logValidationErrors()">
+            <span class="text-danger form-errors" *ngIf="formErrors.title">
+              {{formErrors.title}}
+            </span>
+          </div>
+        </div>
+        <div class="form-group" [ngClass]="{'has-error': formErrors.description}">
+          <label class="col-sm-2 control-label form-labels" for="description">Description</label>
+          <div class="col-sm-10">
+            <textarea class="form-control" id="description" rows="3" formControlName="description"
+              placeholder="Enter Description.." (blur)="logValidationErrors()"></textarea>
+            <span class="text-danger form-errors" *ngIf="formErrors.description">
+              {{formErrors.description}}
+            </span>
+          </div>
+        </div>
+        <div class="form-group" [ngClass]="{'has-error': formErrors.authorName}">
+          <label class="col-sm-2 control-label form-labels" for="authorName">Author Name</label>
+          <div class="col-sm-10">
+            <input id="authorName" type="text" class="form-control" formControlName="authorName"
+              placeholder="Enter Author Name.." (blur)="logValidationErrors()">
+            <span class="text-danger form-errors" *ngIf="formErrors.authorName">
+              {{formErrors.authorName}}
+            </span>
+          </div>
+        </div>
+        <div class="form-group" [ngClass]="{'has-error': formErrors.categories}">
+          <label class="col-sm-2 control-label form-labels">Book Category</label>
+          <div class="col-sm-10">
+            <select formControlName="categories" class="form-control" (blur)="logValidationErrors()">
+              <option [ngValue]="null" disabled>Choose Book Category</option>
+              <option *ngFor="let cat of bookModel.Categories" [ngValue]="cat.BookCategoryId">
+                {{ cat.BookCategoryName }}
+              </option>
+            </select>
+            <span class="text-danger form-errors" *ngIf="formErrors.categories">
+              {{formErrors.categories}}
+            </span>
+          </div>
+        </div>
+        <div class="form-group" [ngClass]="{'has-error': formErrors.quantity}">
+          <label class="col-sm-2 control-label form-labels" for="quantity">Quantity</label>
+          <div class="col-sm-10">
+            <input id="quantity" type="text" class="form-control" formControlName="quantity"
+              placeholder="Enter Quantity.." (blur)="logValidationErrors()">
+            <span class="text-danger form-errors" *ngIf="formErrors.quantity">
+              {{formErrors.quantity}}
+            </span>
+          </div>
+        </div>
+        <div class="form-group" [ngClass]="{'has-error': formErrors.price}">
+          <label class="col-sm-2 control-label form-labels" for="price">Price ($)</label>
+          <div class="col-sm-10">
+            <input id="price" type="text" class="form-control" formControlName="price" placeholder="Enter Price.."
+              (blur)="logValidationErrors()">
+            <span class="text-danger form-errors" *ngIf="formErrors.price">
+              {{formErrors.price}}
+            </span>
+          </div>
+        </div>
+        <div class="form-group" [ngClass]="{'has-error': formErrors.publishedDate}">
+          <label class="col-sm-2 control-label form-labels" for="publishedDate">Published Date</label>
+          <div class="col-sm-10">
+            <input id="publishedDate" type="date" class="form-control" formControlName="publishedDate"
+              (blur)="logValidationErrors()" placeholder="Enter book PublishedDate..">
+            <span class="text-danger form-errors" *ngIf="formErrors.publishedDate">
+              {{formErrors.publishedDate}}
+            </span>
+          </div>
+        </div>
+        <div class="form-group" [ngClass]="{'has-error': formErrors.rating}">
+          <label class="col-sm-2 control-label form-labels" for="rating">Rating</label>
+          <div class="col-sm-10">
+            <input id="rating" type="text" class="form-control" formControlName="rating" placeholder="Enter Rating.."
+              (blur)="logValidationErrors()">
+            <span class="text-danger form-errors" *ngIf="formErrors.rating">
+              {{formErrors.rating}}
+            </span>
+          </div>
+        </div>
+        <div class="form-group" [ngClass]="{'has-error': formErrors.image}">
+          <label class="col-sm-2 control-label form-labels" for="image">Image</label>
+          <div class="col-sm-10">
+            <input id="image" type="file" class="form-control-file" formControlName="image"
+              (change)="onFileChange($event)" placeholder="Enter book ImageURL.." (blur)="logValidationErrors()"
+              style="margin-bottom: 15px;">
+            <span class="text-danger form-errors" *ngIf="formErrors.image">
+              {{formErrors.image}}
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="panel-footer">
+        <span [title]="!bookFormGroup.valid ? 'Cannot submit with errors' : ''">
+          <button class="btn btn-primary  mx-2" type="submit" [disabled]="!bookFormGroup.valid"
+            (click)="onSubmit()">{{bookAction}}</button>
+          <button class="btn btn-secondary" type="submit" (click)="Cancel()">Cancel</button>
+        </span>
+      </div>
+      <app-errorbadrequest [errorList]="errorBadRequestList"></app-errorbadrequest>
+    </div>
+  </form>
+</div>

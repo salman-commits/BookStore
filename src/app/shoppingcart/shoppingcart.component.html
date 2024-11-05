@@ -1,0 +1,48 @@
+<div class="container mt-5">
+    <div class="row">
+        <section class="col-9">
+            <div *ngIf="(shoppingCartService.userShoppingItemCountSubject$  | async) === 0"
+                class="row align-items-center">
+                <div class="col-lg-4 d-flex">
+                    There are no items in your basket
+                </div>
+                <div class="col-lg-8 d-flex">
+                    <a routerLink="/shop" class="btn btn-outline-primary mx-2">
+                        <i class="bi bi-book me-2" style="font-size: 20px;"></i>
+                        Add books to your shopping cart!
+                    </a>
+                </div>
+            </div>
+            <ng-container *ngIf="(shoppingCartService.userShoppingItemCountSubject$ | async)">
+                <div class="container">
+                    <div class="row">
+
+                        <app-shoppingcart-summary (addItem)="addBookToCart($event)"
+                            (removeItem)="removeBookFromCart($event)"></app-shoppingcart-summary>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-6 offset-6 ">
+                            <div class="d-grid">
+                                <a routerLink="/checkout" class="btn btn-outline-primary py-2">
+                                    Proceed to checkout
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </ng-container>
+        </section>
+        <section class="col-3" style="margin-top: 40px;">
+            <div *ngIf="(shoppingCartService.userShoppingItemCountSubject$  | async) !== 0">
+                <div *ngIf="(shoppingCartService.userShoppingItemDetailsSubject$  | async) as ordertotal">
+                    <app-book-orders [shoppingCartTotal]="ordertotal.ShoppingCartTotal"
+                        [shippingCharge]="ordertotal.ShippingCharge"
+                        [shoppingCartGrandTotal]="ordertotal.ShoppingCartGrandTotal">
+                    </app-book-orders>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

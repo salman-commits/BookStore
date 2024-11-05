@@ -1,0 +1,60 @@
+<div class="page-holder align-items-center pb-4 bg-gray-100 vh-100">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6">
+        <div class="card">
+          <div class="card-header px-lg-5">
+            <div class="card-heading text-primary">Login</div>
+          </div>
+          <div class="card-body p-lg-5">
+            <h3 class="mb-4">Hi, welcome back!</h3>
+            <p class="text-muted text-md mb-3">Enjoy the online shopping experience with BookStore, login to continue...
+            </p>
+            <form [formGroup]="loginFormGroup" (ngSubmit)="onSubmit()">
+              <div class="form-floating mb-3" [ngClass]="{'has-error': formErrors.email}">
+                <input placeholder="Email address" formControlName="email" class="form-control" id="floatingInput"
+                  type="email" (blur)="logValidationErrors()">
+                <label for="floatingInput">Email address</label>
+                <span class="text-danger form-errors" *ngIf="formErrors.email">
+                  {{formErrors.email}}
+                </span>
+              </div>
+              <div class="form-floating mb-3" [ngClass]="{'has-error': formErrors.password}">
+                <input formControlName="password" class="form-control" id="floatingPassword" type="password"
+                  placeholder="Password" (blur)="logValidationErrors()">
+                <label for="floatingPassword">Password</label>
+                <span class="text-danger form-errors" *ngIf="formErrors.password">
+                  {{formErrors.password}}
+                </span>
+              </div>
+              <div class="text-left mb-1" [ngClass]="{'has-error': formErrors.password}">
+                <span [title]="!loginFormGroup.valid ? 'Login Validation Failed' : ''">
+                  <button [disabled]="loginFormGroup.invalid" type="submit" class="btn btn-lg btn-primary">
+                    Login
+                  </button>
+                </span>
+              </div>
+              <app-errorbadrequest [errorList]="errorBadRequestList"></app-errorbadrequest>
+              <div *ngIf="error" class="alert alert-danger d-flex align-items-center" role="alert">
+                <div>
+                  <i class="bi bi-exclamation-triangle-fill"></i>There was a problem logging in,
+                  <strong>{{error}}</strong>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="card-footer px-lg-5 py-lg-2">
+            <div class="text-lg text-muted">Don't have an account? <a routerLinkActive="active"
+                routerLink="/signup">Sign Up</a>.</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 col-xl-5 ms-xl-auto px-lg-4 text-center text-primary">
+        <img class="img-fluid mb-4" width="500" src="/assets/images/loginbookstore1.jpg" alt="">
+        <p class="lead text-muted">Today, online bookstore has become very popular among the booklovers as these online
+          stall for books have been very helpful for the book lovers, students and bibliophiles, for the fact that these
+          have provided people to shop right from their homes and get their books delivered at their doorsteps.</p>
+      </div>
+    </div>
+  </div>
+</div>

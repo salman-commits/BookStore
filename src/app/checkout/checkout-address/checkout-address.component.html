@@ -1,0 +1,80 @@
+<div class="mt-4" *ngIf="checkoutForm" [formGroup]="checkoutForm">
+    <div class="row" formGroupName="addressForm">
+        <div class="col-2 form-group" *ngFor="let at of addressType1; let i=index">
+            <input type="radio" id={{at.AddressTypeId}} value={{at.AddressTypeId}} formControlName="addressType1"
+                class="form-check-input" [checked]="i === 0" (change)="getAddressBasedOnType(at.AddressTypeId!)">
+            <label for="{{at.AddressTypeId}}" class="form-check-label ms-2 mb-3">
+                <strong>{{at.AddressTypeName}}</strong>
+            </label>
+            <br />
+        </div>
+    </div>
+    <div class="row" formGroupName="addressForm">
+        <div class="form-floating mb-3 col-6" [ngClass]="{'has-error': formErrors.addressLine1}">
+            <input placeholder="Address Line 1" formControlName="addressLine1" class="form-control" id="addressLine1"
+                type="text" (blur)="logValidationErrors()">
+            <label for="addressLine1">Address Line 1</label>
+            <span class="text-danger form-errors" *ngIf="formErrors.addressLine1">
+                {{formErrors.addressLine1}}
+            </span>
+        </div>
+        <div class="form-floating mb-3 col-6">
+            <input placeholder="Address Line 2" formControlName="addressLine2" class="form-control" id="addressLine2"
+                type="text">
+            <label for="addressLine2">Address Line 2</label>
+        </div>
+        <div class="form-floating mb-3 col-6" [ngClass]="{'has-error': formErrors.city}">
+            <input placeholder="City" formControlName="city" class="form-control" id="city" type="text"
+                (blur)="logValidationErrors()">
+            <label for="city">City</label>
+            <span class="text-danger form-errors" *ngIf="formErrors.city">
+                {{formErrors.city}}
+            </span>
+        </div>
+        <div class="form-floating mb-3 col-6" [ngClass]="{'has-error': formErrors.state}">
+            <input placeholder="State" formControlName="state" class="form-control" id="state" type="text"
+                (blur)="logValidationErrors()">
+            <label for="addressLine1">State</label>
+            <span class="text-danger form-errors" *ngIf="formErrors.state">
+                {{formErrors.state}}
+            </span>
+        </div>
+        <div class="form-floating mb-3 col-6" [ngClass]="{'has-error': formErrors.country}">
+            <input placeholder="Country" formControlName="country" class="form-control" id="country" type="text"
+                (blur)="logValidationErrors()">
+            <label for="country">Country</label>
+            <span class="text-danger form-errors" *ngIf="formErrors.country">
+                {{formErrors.country}}
+            </span>
+        </div>
+        <div class="form-floating mb-3 col-6" [ngClass]="{'has-error': formErrors.zipCode}">
+            <input placeholder="zipCode" formControlName="zipCode" class="form-control" id="zipCode" type="text"
+                (blur)="logValidationErrors()">
+            <label for="zipCode">Zip Code</label>
+            <span class="text-danger form-errors" *ngIf="formErrors.zipCode">
+                {{formErrors.zipCode}}
+            </span>
+        </div>
+        <div class="form-floating mb-3 col-6" [ngClass]="{'has-error': formErrors.phoneNumber}">
+            <input placeholder="phoneNumber" formControlName="phoneNumber" class="form-control" id="zipCode" type="text"
+                (blur)="logValidationErrors()">
+            <label for="phoneNumber">Phone Number</label>
+            <span class="text-danger form-errors" *ngIf="formErrors.phoneNumber">
+                {{formErrors.phoneNumber}}
+            </span>
+        </div>
+    </div>
+</div>
+<div class="d-flex justify-content-between flex-row mb-5">
+    <button class="btn btn-outline-primary" routerLink="/basket">
+        <i class="fa fa-angle-left"></i> Back to basket
+    </button>
+    <button [disabled]="checkoutForm?.get('addressForm')?.invalid" class="btn btn-primary"
+        (click)="setUserAddress(checkoutForm?.get('addressForm')?.value)">
+        Save Address <i class="fa fa-angle-right"></i>
+    </button>
+    <button [disabled]="!isValidAddress" class="btn btn-primary" cdkStepperNext>
+        Go to Delivery
+    </button>
+</div>
+<app-errorbadrequest [errorList]="errorBadRequestList"></app-errorbadrequest>

@@ -1,0 +1,33 @@
+<div class="container">
+    <div class="row" *ngIf="book">
+        <div class="col-3">
+            <img src="{{book.ImageURL}}" alt="{{book.Title}}" class="w-100">
+        </div>
+        <div class="col-9 margin-left-5">
+            <h2>{{book.Title}}</h2>
+            <p style="font-size: 2em;">{{book.Price| currency}}</p>
+
+            <h5 class="text-primary mb-3" *ngIf="quantityInBasket > 0">
+                You have {{quantityInBasket}} of this item in your basket
+            </h5>
+            <div class="d-flex justify-content-start align-items-center">
+                <i class="bi bi-bag-dash text-primary me-2" (click)="decrementQuantity()"
+                    [ngClass]="{ 'disabled': quantity === 0 }" style="cursor: pointer; font-size: 2em;"
+                    title="Remove book from cart"></i>
+                <span class="font-weight-bold" style="font-size: 1.5em;">
+                    {{quantity}}
+                </span>
+                <i class="bi bi-bag-plus text-primary ms-2" (click)="incrementQuantity()" title="Add book to cart"
+                    style="cursor: pointer; font-size: 2em;"></i>
+            </div>
+            <div class="row mt-4">
+                <h4>Description</h4>
+                <p>{{book.Description}}</p>
+            </div>
+            <div class="d-flex justify-content-start align-items-center mt-5">
+                <button (click)="backToShop()" class="btn btn-outline-primary">Back To Shop</button>
+            </div>
+        </div>
+    </div>
+</div>
+<app-errorbadrequest [errorList]="errorBadRequestList"></app-errorbadrequest>
